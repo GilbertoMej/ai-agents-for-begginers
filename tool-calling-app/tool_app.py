@@ -1,4 +1,5 @@
 import os
+import json
 from openai import OpenAI
 
 client = OpenAI(
@@ -35,9 +36,7 @@ def execute_tool(name, args):
     return f"Unknown tool: {name}"
 
 system_message = "You are a helpful personal assistant."
-messages = []
 
-# Add initial messages and API call here
 messages = [
     {"role": "system", "content": system_message},
     {"role": "user", "content": "What's on my calendar today?"}
@@ -51,3 +50,28 @@ response = client.chat.completions.create(
 
 finish_reason = response.choices[0].finish_reason
 print(f"Finish reason: {finish_reason}")
+
+if finish_reason == "tool_calls":
+    assistant_message = response.choices[0].message
+    messages.append(assistant_message)
+
+    for tool_call in assistant_message.tool_calls:
+        name = tool_call.function.name
+        args = json.loads(tool_call.function.arguments)
+        result = execute_tool(name, args)
+
+        messages.append({
+            "role": "tool",
+            "tool_call_id": tool_call.id,
+            "content": result,
+        })
+
+    final_response = client.chat.completions.create(
+        model="openai/gpt-4.1-mini",
+        messages=messages,
+        tools=tools,
+    )
+    print(final_response.choices[0].message.content)
+else:
+    print(response.choices[0].message.content)
+
