@@ -10,6 +10,8 @@ messages = [
     {"role": "system", "content": "You are a helpful assistant."}
 ]
 
+messages.append({"role": "user", "content": "What are three things an AI agent can do that a regular chatbot cannot?"})
+
 while True:
     response = client.chat.completions.create(
         model="openai/gpt-4.1-mini",
