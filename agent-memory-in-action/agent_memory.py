@@ -26,6 +26,11 @@ def run_agent(messages):
         else:
             return choice.message.content
 
+def trim_history(messages, max_messages=6):
+    if len(messages) > max_messages:
+        return [messages[0]] + messages[-(max_messages - 1):]
+    return messages
+
 messages = [
     {"role": "system", "content": SYSTEM_PROMPT}
 ]
@@ -41,6 +46,7 @@ questions = [
 for q in questions:
     messages.append({"role": "user", "content": q})
     answer = run_agent(messages)
+    messages = trim_history(messages, max_messages=6)
     print(f"Q: {q}")
     print(f"A: {answer}")
     print(f"Messages in history: {len(messages)}")
