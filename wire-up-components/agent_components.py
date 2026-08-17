@@ -40,6 +40,8 @@ tools = [
 def check_calendar(date):
     return "10am: Team standup, 2pm: Dentist appointment"
 
+messages.append({"role": "user", "content": "What's on my calendar today?"})
+
 while True:
     response = client.chat.completions.create(
         model=model,
