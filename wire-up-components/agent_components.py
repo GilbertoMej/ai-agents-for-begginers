@@ -10,7 +10,13 @@ client = OpenAI(
 model = "openai/gpt-4.1-mini"
 messages = []
 
-# Add the while loop here
+messages = [
+    {
+        "role": "system",
+        "content": "You are a helpful personal assistant. Use your tools when you need real data."
+    }
+]
+
 while True:
     response = client.chat.completions.create(
         model=model,
