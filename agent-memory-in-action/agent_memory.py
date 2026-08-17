@@ -8,7 +8,7 @@ client = OpenAI(
 )
 
 # Write the system prompt here
-SYSTEM_PROMPT = ""
+SYSTEM_PROMPT = "You are a helpful personal assistant. Use your tools when you need real data."
 
 def run_agent(messages):
     while True:
