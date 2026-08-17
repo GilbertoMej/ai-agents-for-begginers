@@ -17,6 +17,29 @@ messages = [
     }
 ]
 
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "check_calendar",
+            "description": "Check the user's calendar for events on a given date.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "description": "The date to check, e.g. 2026-03-14"
+                    }
+                },
+                "required": ["date"]
+            }
+        }
+    }
+]
+
+def check_calendar(date):
+    return "10am: Team standup, 2pm: Dentist appointment"
+
 while True:
     response = client.chat.completions.create(
         model=model,
