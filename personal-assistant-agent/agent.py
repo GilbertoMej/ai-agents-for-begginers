@@ -21,7 +21,7 @@ def run_agent(user_message, conversation_history=None):
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_message}
     ]
-    
+
     messages = [{"role": "system", "content": system_prompt}]
     if conversation_history:
         messages.extend(conversation_history)
@@ -61,5 +61,5 @@ def run_agent(user_message, conversation_history=None):
             return msg.content
 
 if __name__ == "__main__":
-    run_agent("Please use the broken_tool.")
+    run_agent("Please check the calendar and tell me what do I have on Monday. Also give me the user preferences")
 

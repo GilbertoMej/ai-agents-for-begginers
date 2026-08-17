@@ -7,3 +7,15 @@
 7. Agentic Patterns
 8. Safe Agent
 9. Personal Assistant Agent
+
+AI Frameworks
+
+LANGCHAIN:
+- Most widely used agend framework
+- Python + JS
+- Tool use, Memory, Retrieval, Multi-Step Reasoning
+
+LANGGRAPH:
+- It models agent behavior as graphs
+- Nodes = Steps + Edges = Transitions
+
