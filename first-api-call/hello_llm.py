@@ -14,12 +14,12 @@ print(f"{'─'*90}")
 
 for i in range(10):
     r0 = client.chat.completions.create(
-        model="openai/gpt-4.1-mini",
+        model="nvidia/nemotron-3-ultra-550b-a55b:free",
         temperature=0.0,
         messages=[{"role": "user", "content": prompt}]
     )
     r2 = client.chat.completions.create(
-        model="openai/gpt-4.1-mini",
+        model="nvidia/nemotron-3-ultra-550b-a55b:free",
         temperature=2.0,
         messages=[{"role": "user", "content": prompt}]
     )

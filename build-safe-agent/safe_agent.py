@@ -6,7 +6,7 @@ client = OpenAI(
     base_url=os.environ["OPENAI_API_BASE"]
 )
 
-model = "openai/gpt-4.1-mini"
+model = "nvidia/nemotron-3-ultra-550b-a55b:free"
 
 tools = [
     {

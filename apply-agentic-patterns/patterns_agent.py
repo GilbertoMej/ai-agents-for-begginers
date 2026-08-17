@@ -55,25 +55,25 @@ def run_agent(user_message):
     ]
     while True:
         response = client.chat.completions.create(
-            model="openai/gpt-4.1-mini",
+            model="nvidia/nemotron-3-ultra-550b-a55b:free",
             messages=messages,
             tools=tools
         )
         msg = response.choices[0].message
         messages.append(msg)
-        
+
         if msg.tool_calls:
             # Human approval before executing tools
             print(f"\nAgent wants to call tool(s).")
             for tc in msg.tool_calls:
                 print(f"  Tool: {tc.function.name}")
                 print(f"  Args: {tc.function.arguments}")
-            
+
             approval = input("\nApprove this action? (y/n): ")
             if approval.lower() != 'y':
                 print("Action denied by human. Stopping agent.")
                 break
-                
+
             for tc in msg.tool_calls:
                 args = json.loads(tc.function.arguments)
                 if tc.function.name == "check_calendar":

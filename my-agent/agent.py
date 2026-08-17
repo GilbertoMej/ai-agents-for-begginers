@@ -9,7 +9,7 @@ client = OpenAI(
 
 # First API Call
 response = client.chat.completions.create(
-    model="openai/gpt-4.1",
+    model="nvidia/nemotron-3-ultra-550b-a55b:free",
     messages=[
         {"role": "system",
          "content": "Be concise and friendly."},

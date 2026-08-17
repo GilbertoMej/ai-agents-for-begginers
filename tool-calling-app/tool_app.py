@@ -43,7 +43,7 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-    model="openai/gpt-4.1-mini",
+    model="nvidia/nemotron-3-ultra-550b-a55b:free",
     messages=messages,
     tools=tools,
 )
@@ -67,7 +67,7 @@ if finish_reason == "tool_calls":
         })
 
     final_response = client.chat.completions.create(
-        model="openai/gpt-4.1-mini",
+        model="nvidia/nemotron-3-ultra-550b-a55b:free",
         messages=messages,
         tools=tools,
     )

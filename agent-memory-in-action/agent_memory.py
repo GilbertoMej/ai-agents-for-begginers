@@ -12,7 +12,7 @@ SYSTEM_PROMPT = "You are a helpful personal assistant. Use your tools when you n
 def run_agent(messages):
     while True:
         response = client.chat.completions.create(
-            model="openai/gpt-4.1-mini",
+            model="nvidia/nemotron-3-ultra-550b-a55b:free",
             messages=messages,
             tools=tools,
         )
