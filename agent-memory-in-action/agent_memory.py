@@ -7,7 +7,6 @@ client = OpenAI(
     base_url=os.getenv("OPENAI_API_BASE"),
 )
 
-# Write the system prompt here
 SYSTEM_PROMPT = "You are a helpful personal assistant. Use your tools when you need real data."
 
 def run_agent(messages):
@@ -26,4 +25,24 @@ def run_agent(messages):
                 messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
         else:
             return choice.message.content
+
+messages = [
+    {"role": "system", "content": SYSTEM_PROMPT}
+]
+
+questions = [
+    "What's on my calendar today?",
+    "Tell me about the standup.",
+    "What time is my dentist?",
+    "Am I free at 3pm?",
+    "Summarise my day.",
+]
+
+for q in questions:
+    messages.append({"role": "user", "content": q})
+    answer = run_agent(messages)
+    print(f"Q: {q}")
+    print(f"A: {answer}")
+    print(f"Messages in history: {len(messages)}")
+    print()
 
