@@ -44,8 +44,24 @@ while True:
     response = client.chat.completions.create(
         model=model,
         messages=messages,
+        tools=tools
     )
     finish_reason = response.choices[0].finish_reason
-    if finish_reason == "stop":
-        print(response.choices[0].message.content)
+    assistant_message = response.choices[0].message
+    messages.append(assistant_message)
+
+    if finish_reason == "tool_calls":
+        for tool_call in assistant_message.tool_calls:
+            name = tool_call.function.name
+            import json
+            args = json.loads(tool_call.function.arguments)
+            if name == "check_calendar":
+                result = check_calendar(**args)
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "content": result
+            })
+    elif finish_reason == "stop":
+        print(assistant_message.content)
         break
